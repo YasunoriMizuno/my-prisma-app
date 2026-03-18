@@ -1,13 +1,16 @@
 import PageTitle from '@/components/PageTitle';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+// 👇 さっき作ったアクションを読み込む
+import { createTask } from './_action';
 
 // タスク作成画面
 export default function CreateTaskPage() {
   return (
     <>
       <PageTitle title="タスク作成" />
-      <form className="flex flex-col gap-3">
+      {/* 👇 action={createTask} を追加して、フォームと機能を合体！ */}
+      <form action={createTask} className="flex flex-col gap-3">
         <Input 
           label="タイトル" 
           type="text" 
