@@ -1,53 +1,53 @@
 import PageTitle from '@/components/PageTitle';
+import { prisma } from '../../lib/prisma';
 
-/** タスクの型定義 */
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-  deadline: string;
-};
+export default async function TaskListPage() {
+  // 💡 データベース（Supabase）から全てのタスクを「新着順」で取ってくる
+  const tasks = await prisma.todo.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
 
-/** ダミーデータ */
-const DUMMY_TASKS: Task[] = [
-  {
-    id: '1',
-    title: 'タスク1',
-    description: 'Prismaのセットアップが完了しました！',
-    status: '未着手',
-    deadline: '2026-03-18',
-  },
-  {
-    id: '2',
-    title: 'タスク2',
-    description: '次はServer Actionsを実装します。',
-    status: '未着手',
-    deadline: '2026-03-19',
-  },
-];
-
-// タスク一覧画面
-export default function TasksPage() {
   return (
     <>
       <PageTitle title="タスク一覧" />
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-row gap-2 w-full border-b border-blue-800 pb-2 font-bold">
-          <p className="w-1/4">タイトル</p>
-          <p className="w-1/2">詳細</p>
-          <p className="w-1/8">ステータス</p>
-          <p className="w-1/8">期限</p>
-        </div>
-        {DUMMY_TASKS.map((task) => (
-          <div key={task.id} className="flex flex-row gap-2 w-full border-b border-blue-400 py-2 hover:bg-white/20 transition-colors">
-            <p className="w-1/4 truncate">{task.title}</p>
-            <p className="w-1/2 truncate">{task.description}</p>
-            <p className="w-1/8">{task.status}</p>
-            <p className="w-1/8">{task.deadline}</p>
-          </div>
-        ))}
-      </div>
+      <table className="w-full text-left border-collapse mt-4">
+        <thead>
+          <tr className="border-b bg-gray-50">
+            <th className="p-2">タイトル</th>
+            <th className="p-2">詳細</th>
+            <th className="p-2">ステータス</th>
+            <th className="p-2">期限</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* 💡 取ってきた本物のデータ（tasks）を1つずつ画面に並べる */}
+          {tasks.map((task) => (
+            <tr key={task.id} className="border-b hover:bg-gray-50">
+              <td className="p-2 font-medium">{task.title}</td>
+              <td className="p-2 text-gray-600">{task.description}</td>
+              <td className="p-2 text-sm">
+                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full">
+                  {task.status}
+                </span>
+              </td>
+              <td className="p-2 text-gray-500">
+                {/* 日付を見やすく変換 */}
+                {new Date(task.deadline).toLocaleDateString('ja-JP')}
+              </td>
+            </tr>
+          ))}
+          {/* データが1件もない時の表示 */}
+          {tasks.length === 0 && (
+            <tr>
+              <td colSpan={4} className="p-4 text-center text-gray-500">
+                タスクがありません。新しく作成しましょう！
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </>
   );
 }
