@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Task App (CRUD)
 
-## Getting Started
+Next.js、Prisma、Supabaseの学習のために作成したタスク管理アプリです。
 
-First, run the development server:
+## 🚀 実装した機能
+- **一覧表示・詳細表示**: データベースから情報を取得して表示
+- **タスク作成**: 新しいタスクをデータベースに保存
+- **タスク編集**: 既存のタスク内容を更新
+- **タスク削除**: データベースからタスクを削除
+- **動的ルーティング**: `[id]` を利用した詳細ページの生成
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠 使用技術
+- **Framework**: Next.js (App Router)
+- **Database**: Supabase (PostgreSQL)
+- **ORM**: Prisma
+- **Styling**: Tailwind CSS
