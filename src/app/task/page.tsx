@@ -35,7 +35,12 @@ export default async function TaskListPage() {
           {/* 💡 DBにある項目（title, completed, createdAt）だけで表示 */}
           {tasks.map((task) => (
             <tr key={task.id} className="border-b hover:bg-gray-50 text-sm">
-              <td className="p-2 font-medium">{task.title}</td>
+              <td className="p-2 font-medium">
+  <Link href={`/task/${task.id}`} className="text-blue-600 hover:underline">
+    {task.title}
+  </Link>
+</td>
+
               <td className="p-2 text-center">
                 <span className={`px-2 py-1 rounded-full text-xs ${
                   task.completed 
