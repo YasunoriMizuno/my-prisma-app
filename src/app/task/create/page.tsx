@@ -1,45 +1,30 @@
-import PageTitle from '@/components/PageTitle';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-// 👇 さっき作ったアクションを読み込む
-import { createTask } from './_action';
+import { createTask } from './actions';
 
-// タスク作成画面
 export default function CreateTaskPage() {
   return (
-    <>
-      <PageTitle title="タスク作成" />
-      {/* 👇 action={createTask} を追加して、フォームと機能を合体！ */}
-      <form action={createTask} className="flex flex-col gap-3">
-        <Input 
-          label="タイトル" 
-          type="text" 
-          name="title" 
-          placeholder="タイトル" 
-          required 
-        />
-        <div className="flex flex-row gap-2 w-full">
-          <label className="w-20">詳細</label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="詳細"
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">タスク新規作成</h2>
+      
+      {/* 💡 action に先ほど作った関数を指定するだけ！ */}
+      <form action={createTask} className="flex flex-col gap-4">
+        <div>
+          <label className="block text-sm font-medium">タイトル</label>
+          <input
+            name="title"
+            type="text"
             required
-            className="w-full max-w-xs h-24 border bg-white p-1"
-          ></textarea>
-        </div>
-        <div className="flex flex-row gap-2 w-full">
-          <label className="w-20">期限</label>
-          <input 
-            className="max-w-xs border bg-white p-1" 
-            type="date" 
-            id="deadline" 
-            name="deadline" 
-            required 
+            className="border p-2 w-full rounded"
+            placeholder="例：牛乳を買う"
           />
         </div>
-        <Button type="submit">作成する</Button>
+        
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        >
+          保存する
+        </button>
       </form>
-    </>
+    </div>
   );
 }
